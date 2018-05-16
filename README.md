@@ -1,1 +1,1 @@
-# SplashAdvertise简单的启动闪屏
+# SplashAdvertise简单的启动显示动态加载的广告页Demo
