@@ -8,17 +8,15 @@
 
 import UIKit
 import CoreData
-let adImageName = "adImageName"
-let adUrl = "adUrl"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-//    var adView = AdView()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+    
         window = UIWindow(frame:UIScreen.main.bounds)
         let storyBoard = UIStoryboard(name:"Main",bundle:nil)
         let advertiseVC = storyBoard.instantiateViewController(withIdentifier: "AdViewController") as! AdViewController

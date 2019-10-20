@@ -10,6 +10,8 @@ import UIKit
 
 class AdViewController: UIViewController {
     
+    let adUrl = "adUrl"
+    
     @IBOutlet weak var bigImg: UIImageView!
     
     @IBOutlet weak var timeButton: UIButton!
@@ -23,23 +25,28 @@ class AdViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         //异步加载图片
         getAdImage()
-        //        let url = URL(string:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1526472818832&di=7bae513a2258c9b23aace1fe63fdcea8&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F013c81583fa08ea8012060c864c3b7.jpg")
-        //        let data = try? Data(contentsOf: url!)
-        //        if data != nil {
-        //            let image = UIImage(data: data!)
-        //            bigImg.image = image
-        //        }
+//        let url = URL(string:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1526472818832&di=7bae513a2258c9b23aace1fe63fdcea8&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F013c81583fa08ea8012060c864c3b7.jpg")
+//        let data = try? Data(contentsOf: url!)
+//        if data != nil {
+//            let image = UIImage(data: data!)
+//            bigImg.image = image
+//        }
         let image = "pic.jpg"//UserDefaults.standard.value(forKey: adImageName) as! String? ?? " "
         let filePath = NSHomeDirectory().appending("/Documents/\(image)")
         let isExist = self.isFileExist(withFilePath: (filePath))
         if isExist {
             bigImg.image = UIImage(contentsOfFile: filePath)
         }
+        else {
+            bigImg.image = UIImage(named: "launch.jpg")
+        }
+
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.red
+        
+        bigImg.frame = self.view.frame
         
         timeButton.setTitleColor(UIColor.white, for: .normal)
         timeButton.layer.cornerRadius = 6
@@ -122,7 +129,7 @@ class AdViewController: UIViewController {
             let fileManager = FileManager.default
             fileManager.createFile(atPath: filePath, contents: data , attributes: nil)
             self.deletImage()
-            UserDefaults.standard.set(imageName, forKey: adImageName)
+            UserDefaults.standard.set(imageName, forKey: self.adUrl)
             UserDefaults.standard.synchronize()
             
         })
@@ -130,7 +137,7 @@ class AdViewController: UIViewController {
     
     //删除图片
     func deletImage()  {
-        let imageName = UserDefaults.standard.value(forKey: adImageName) as? String
+        let imageName = UserDefaults.standard.value(forKey: self.adUrl) as? String
         if imageName != nil {
             let filePath = NSHomeDirectory().appending("/Documents/\(imageName!)")
             let fileManager:FileManager = FileManager.default
