@@ -39,6 +39,9 @@ class AdViewController: UIViewController {
         }
         else {
             bigImg.image = UIImage(named: "launch.jpg")
+            let a = 1
+            let b = 2
+            let c = a+b
         }
 
     }
